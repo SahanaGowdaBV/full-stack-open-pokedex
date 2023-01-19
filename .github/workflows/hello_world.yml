@@ -1,18 +1,18 @@
-name: Hello World!
+name: Hello World!  #This is name of the workflow
 
-on:
-  push:
+on:  #Manage the workflow triggers
+  push: #Event that trigger 
     branches:
       - master
 
-jobs:
-  hello_world:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Hello World
-        run: |
+jobs:  #This job will be executed when the workflow triggers
+  hello_world:  #This is the name of the jon
+    runs-on: ubuntu-18.04  #Machine to execute the jobs
+    steps: 
+      - name: Hello World  #name of step1
+        run: 
           echo "Hello World!"
-      - name: Show the date
+      - name: Show the date  #name of Step2
         run: date
-      - name: Directory content
+      - name: Directory content #name of step3
         run: ls -l
