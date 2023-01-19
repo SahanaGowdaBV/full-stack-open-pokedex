@@ -1,10 +1,10 @@
 name: Deployment pipeline
 
 on:
-  push:
+  push:  #trigger
     branches:
       - master
-  pull_request:
+  pull_request:  #trigger
     branches: [master]
     types: [opened, synchronize]
 
@@ -12,22 +12,35 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
+    #This will clone the current repository into the VM/container running this GitHub actions.
       - uses: actions/checkout@v3
+   
+   #This will install node with version 16
       - uses: actions/setup-node@v3
-        with:
+        with:  #mention the parameters
+   
+   #Install node with version 16
           node-version: "16"
+   
+   #Install Node dependencies for the project
       - name: npm install
         run: npm install
+   
+   #Run the lint to check the code standards
       - name: lint
         run: npm run eslint
+        
+     #Build the application
       - name: build
         run: npm run build
+        
       - name: test
         run: npm test
+        
       # End to end test frontend functionality
       - name: e2e tests
         uses: cypress-io/github-action@v4
-        with:
+        with:  
          build: npm run build
          start: npm run start-prod
          wait-on: http://localhost:5000
